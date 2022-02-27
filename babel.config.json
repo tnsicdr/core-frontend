@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "@babel/preset-typescript",
+      {
+        "allowDeclareFields": true
+      }
+    ],
+    [
+      "@babel/preset-env",
+      {
+        "bugfixes": true,
+        "corejs": "3.21"
+      }
+    ]
+  ]
+}
