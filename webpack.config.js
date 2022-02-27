@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = (env) => {
-  const isDevelopment = env.development;
+module.exports = () => {
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
   return {
     entry: `./src/index.ts`,
@@ -20,7 +21,7 @@ module.exports = (env) => {
         {
           test: /\.(scss|sass|css)$/,
           use: [
-            "style-loader",
+            MiniCssExtractPlugin.loader,
             {
               loader: "css-loader",
               options: {
@@ -45,13 +46,14 @@ module.exports = (env) => {
         },
       ],
     },
-    devtool: isDevelopment ? 'eval-source-map' : false,
+    devtool: isDevelopment ? 'source-map' : false,
     output: {
       path: path.resolve(__dirname, './dist'),
       filename: '[name].bundle.js',
     },
     plugins: [
-      new HtmlWebpackPlugin()
+      new HtmlWebpackPlugin(),
+      new MiniCssExtractPlugin()
     ]
   };
 };
