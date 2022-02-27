@@ -7,7 +7,7 @@ module.exports = () => {
 
   return {
     entry: {
-      main: `./src/index.ts`,
+      main: `./src/index.tsx`,
       second: `./src/second.ts`
     },
     output: {
@@ -17,7 +17,7 @@ module.exports = () => {
     module: {
       rules: [
         {
-          test: /\.(ts|js)$/,
+          test: /\.(ts|tsx|js|jsx)$/,
           exclude: /node_modules/,
           use: ["babel-loader"],
         },
