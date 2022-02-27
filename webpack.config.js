@@ -1,12 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = () => {
   const isDevelopment = process.env.NODE_ENV === 'development';
 
   return {
-    entry: `./src/index.ts`,
+    entry: {
+      main: `./src/index.ts`,
+      second: `./src/second.ts`
+    },
     output: {
       filename: "main.js",
       path: path.resolve(__dirname, "dist"),
@@ -47,13 +50,35 @@ module.exports = () => {
       ],
     },
     devtool: isDevelopment ? 'source-map' : false,
+    optimization: {
+      splitChunks: {
+        chunks: 'async',
+        minSize: 20000,
+        minRemainingSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        enforceSizeThreshold: 50000,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+            reuseExistingChunk: true,
+          },
+          default: {
+            minChunks: 1,
+            priority: -20,
+            reuseExistingChunk: false,
+          },
+        },
+      }
+    },
     output: {
       path: path.resolve(__dirname, './dist'),
       filename: '[name].bundle.js',
     },
     plugins: [
-      new HtmlWebpackPlugin(),
-      new MiniCssExtractPlugin()
+      new MiniCssExtractPlugin(),
     ]
   };
 };
