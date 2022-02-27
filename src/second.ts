@@ -1,2 +1,4 @@
 import './styles/main.scss'
-console.log('test')
+import IconPNG from './assets/images/icon.png'
+
+const icon = IconPNG;

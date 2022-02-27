@@ -47,6 +47,13 @@ module.exports = () => {
             }
           ],
         },
+        {
+          test: /\.(png|jpg|gif)$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: 'images/[hash][ext][query]'
+          }
+        }
       ],
     },
     devtool: isDevelopment ? 'source-map' : false,
@@ -77,6 +84,7 @@ module.exports = () => {
       path: path.resolve(__dirname, './dist'),
       filename: '[name].bundle.js',
     },
+
     plugins: [
       new MiniCssExtractPlugin(),
     ]
