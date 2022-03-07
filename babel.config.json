@@ -11,7 +11,7 @@
       {
         "bugfixes": true,
         "corejs": "3.21",
-        "useBuiltIns": "usage"
+        "useBuiltIns": "entry"
       }
     ]
   ]
